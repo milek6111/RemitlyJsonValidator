@@ -10,9 +10,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Verifier class for AWS::IAM::Role Policy Json validation
+ */
 public class Verifier {
 
+    /** Method which validates whether given JSONObject conforms criteria given in the task.
+     * @param JsonFilePath
+     * @return boolean value of validation
+     */
     public static boolean verify(String JsonFilePath){
+        //extracting value of "Statement" from json as List<JSONObject>
         JSONObject jsonObject = readFromFile(JsonFilePath);
         JSONObject policyDocument = (JSONObject) jsonObject.get("PolicyDocument");
         List<JSONObject> statements =  (List<JSONObject>) policyDocument.get("Statement");
@@ -43,6 +51,11 @@ public class Verifier {
         return asteriskChecker;
     }
 
+    /**
+     * Helper method which reads json file from path given as an argument and returns JSONObject extracted from this file
+     * @param filePath
+     * @return extracted JSONObject
+     */
     private static JSONObject readFromFile(String filePath){
         JSONParser jsonParser = new JSONParser();
         JSONObject returnValue = null;
